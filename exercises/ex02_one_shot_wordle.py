@@ -1,4 +1,4 @@
-"""EX02: One shot Wordle"""
+"""EX02: One shot Wordle!"""
 __author__ = "730416818"
 
 word: str = "python"
@@ -12,11 +12,11 @@ match: str = ""
 i: int = 0
 
 while len(guess) != int(6):
-        guess_again: str = input("That was not 6 letters! Try again: ")
-        guess = guess_again
+    guess_again: str = input("That was not 6 letters! Try again: ")
+    guess = guess_again
 
 if len(guess) == 6:
-    while i < 6:
+    while i < len(guess):
         if guess[i] == word[i]:
             match = match + GREEN_BOX
         elif guess[i] in word:
@@ -27,8 +27,8 @@ if len(guess) == 6:
     
     if guess != word:
         print(match)
-        exit(print("Not quite. Play again soon!"))
+        print("Not quite. Play again soon!")
     
     if guess == word:
         print(match)
-        exit(print("Woo! You got it!"))
+        print("Woo! You got it!")
