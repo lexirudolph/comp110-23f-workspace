@@ -4,11 +4,15 @@ __author__ = "730416818"
 
 def contains_char(char_search: str, word_search: str):
     """This function returns a boolean variable declaring whether the given character is found in the given word."""
-    assert len(char_search) == 1
-    if char_search[0] in word_search:
-        return True
-    else:
-        return False
+    assert len(word_search) == 1
+    
+    i: int = 0
+    while i <= len(word_search):
+        if char_search in word_search:
+            return True
+        else:
+            return False
+        i += 1
 
 
 #def emojified(guessed_word: str, secret_word: str):
