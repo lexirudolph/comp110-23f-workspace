@@ -2,38 +2,67 @@
 
 __author__ = "730416818"
 
-def contains_char(char_search: str, word_search: str):
-    """This function returns a boolean variable declaring whether the given character is found in the given word."""
-    assert len(word_search) == 1
-    
-    i: int = 0
-    while i <= len(word_search):
+
+secret: str = "codes"
+c_match: str = ""
+
+def contains_char(word_search: str, char_search: str):
+    """This function returns a boolean variable declaring whether the //
+    given character is found in the given word."""
+    assert len(char_search) == 1
+    c: int = 0
+    while c <= len(word_search):
         if char_search in word_search:
             return True
         else:
             return False
-        i += 1
+    c += 1
 
-
-#def emojified(guessed_word: str, secret_word: str):
-    """Given two strings of the same length, a string of emojies will be returned indicating which characters match and/or are contained in the guessed word."""
-    
-    guess: str = input("Enter a 5 character word: ")
-    secret: str = "codes"
-    
-    match: str = ""
+def emojified(guessed_word: str, secret_word: str):
+    """Given two strings of the same length, a string of emojies will be //
+    returned indicating which characters match and/or are contained in the guessed word."""
+    assert len(guessed_word) == len(secret_word)
+    global c_match
     i: int = 0
-
-    WHITE_BOX: str = "\U00002B1C"
     GREEN_BOX: str = "\U0001F7E9"
     YELLOW_BOX: str = "\U0001F7E8"
-
-    assert len(guessed_word) == len(secret_word)
-    while i < len(guess):
-        if guess[i] == secret[i]:
-            match = match + GREEN_BOX
-        elif guess[i] in secret:
-            match = match + YELLOW_BOX
+    WHITE_BOX: str = "\U00002B1C"
+    while i < len(guessed_word):
+        if guessed_word[i] == secret_word[i]:
+            c_match = c_match + GREEN_BOX
+        elif guessed_word[i] in secret_word:
+            c_match = c_match + YELLOW_BOX
         else:
-            match = match + WHITE_BOX
+            c_match = c_match + WHITE_BOX
         i = i + 1
+    return c_match
+
+def input_guess(n: int) -> int:
+    """Given an integer of an expected length, the user will be prompted //
+    to guess a word of the expected length."""
+    game_guess: str = input(f"Enter a {n} character word: ")
+    while len(game_guess) != int(n):
+        guess_again: str = input(f"That was not {n} chars! Try again: ")
+        game_guess = guess_again
+
+    if len(game_guess) == (n):
+        return print(c_match + game_guess)
+ 
+def main() -> None:
+    """The entrypoint of the program and main game loop."""
+    a: int = 0
+    t: int = 1
+    while a <= len(secret):
+        print(f"=== Turn {t}/6 ===")
+        wordle_guess: str = input_guess(5)
+        emojified(secret, wordle_guess)
+        a += 1
+        t += 1
+        
+        if wordle_guess == secret:
+            if a == 1:
+                return print(f"You won in {a} try!")
+            else:
+                return print(f"You won in {a} tries!")
+        if a > len(secret):
+            return print("X/6 - Sorry, try again tomorrow!")
