@@ -5,6 +5,7 @@ __author__ = "730416818"
 
 secret: str = "codes"
 c_match: str = ""
+i: int = 0
 
 def contains_char(word_search: str, char_search: str):
     """This function returns a boolean variable declaring whether the //
@@ -23,7 +24,7 @@ def emojified(guessed_word: str, secret_word: str):
     returned indicating which characters match and/or are contained in the guessed word."""
     assert len(guessed_word) == len(secret_word)
     global c_match
-    i: int = 0
+    global i
     GREEN_BOX: str = "\U0001F7E9"
     YELLOW_BOX: str = "\U0001F7E8"
     WHITE_BOX: str = "\U00002B1C"
@@ -46,7 +47,7 @@ def input_guess(n: int) -> int:
         game_guess = guess_again
 
     if len(game_guess) == (n):
-        return print(c_match + game_guess)
+        return (game_guess)
  
 def main() -> None:
     """The entrypoint of the program and main game loop."""
@@ -54,15 +55,15 @@ def main() -> None:
     t: int = 1
     while a <= len(secret):
         print(f"=== Turn {t}/6 ===")
-        wordle_guess: str = input_guess(5)
-        emojified(secret, wordle_guess)
+        wordle_guess: str = input_guess(len(secret))
+        emojified(wordle_guess, secret)
         a += 1
         t += 1
         
         if wordle_guess == secret:
             if a == 1:
-                return print(f"You won in {a} try!")
+                return print(c_match) + print(f"You won in {a} try!")
             else:
-                return print(f"You won in {a} tries!")
+                return print(c_match) + print(f"You won in {a} tries!")
         if a > len(secret):
             return print("X/6 - Sorry, try again tomorrow!")
