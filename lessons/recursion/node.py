@@ -30,7 +30,7 @@ class Node:
         """Returns the data attribute for the first element in the linked list."""
         return self.data
     
-    def tail(self) -> None:
+    def tail(self) -> Node | None:
         """Returns a linked list of every element minus the head."""
         return self.next
     
